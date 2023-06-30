@@ -1,0 +1,16 @@
+setup route
+setup scss (sass, add 2 file index.d.ts,typeings.d.ts)
+
+
+
+- link -
+https://dev.to/jasurkurbanov/how-to-add-custom-typography-variants-in-material-ui-v510-dni
+https://stackoverflow.com/questions/70002471/material-ui-v5-extending-typography-variant-in-typescript-creates-error-no-ov
+
+
+- breakpoint -
+xs, extra-small: 0px
+sm, small: 600px
+md, medium: 900px
+lg, large: 1200px
+xl, extra-large: 1536px
