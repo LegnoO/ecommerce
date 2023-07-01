@@ -1,7 +1,7 @@
 /** @format */
 
-import { useEffect, useState } from "react";
-import { nanoid } from "@reduxjs/toolkit";
+import { useEffect, useState } from 'react';
+import { nanoid } from '@reduxjs/toolkit';
 import {
   Grid,
   Box,
@@ -11,12 +11,12 @@ import {
   Typography,
   FormControlLabel,
   Checkbox,
-  Button,
-} from "@mui/material";
-import axios from "axios";
+  Button
+} from '@mui/material';
+import axios from 'axios';
 
-import { useAppSelector, useAppDispatch } from "./app/hooks";
-import httpRequest from "./services/apiService";
+import { useAppSelector, useAppDispatch } from './app/hooks';
+import httpRequest from './services/apiService';
 interface IProps {}
 
 const Login: React.FC<IProps> = ({ ...props }) => {
@@ -36,45 +36,40 @@ const Login: React.FC<IProps> = ({ ...props }) => {
     // );
 
     setLoading(true);
-    const response = await httpRequest("GET", "/users");
+    const response = await httpRequest('GET', '/users');
     const users = [response.data];
     console.log(users);
-    const check = users.some(
-      (data: any) => data.username === "admin" && data.password === "admin"
-    );
+    const check = users.some((data: any) => data.username === 'admin' && data.password === 'admin');
     if (check) {
-      sessionStorage.setItem("users", JSON.stringify(check));
+      sessionStorage.setItem('users', JSON.stringify(check));
     }
     setLoading(false);
   };
   return (
     <>
-      <Box sx={{ height: "100vh" }}>
-        <Grid container sx={{ height: "100%" }}>
-          <Grid item xs={6} sx={{ backgroundColor: "#f6f7fc" }}>
+      <Box sx={{ height: '100vh' }}>
+        <Grid container sx={{ height: '100%' }}>
+          <Grid item xs={6} sx={{ backgroundColor: '#f6f7fc' }}>
             <Box className="d-flex justify-content-center align-items-center h-100">
               <Grid item xs={7} sx={{ mb: 3 }}>
-                <Box sx={{ height: "fit-content", width: "100%" }}>
+                <Box sx={{ height: 'fit-content', width: '100%' }}>
                   {/* <Typography sx={{ fontSize: '28px', color: 'text.black', mb: 1 }} component="h5">
                     Login to
                   </Typography> */}
-                  <Box
-                    sx={{ mb: 3, display: "flex", justifyContent: "center" }}>
+                  <Box sx={{ mb: 3, display: 'flex', justifyContent: 'center' }}>
                     <img
                       src="https://minim-demo.myshopify.com/cdn/shop/t/4/assets/logo.png?v=76281246793426370331552127529"
                       alt=""
                     />
                   </Box>
                   <Typography
-                    sx={{ fontSize: "16px", color: "text.disabled", mb: 3 }}
-                    component="p">
-                    Lorem ipsum dolor sit amet elit. Sapiente sit aut eos
-                    consectetur adipisicing.
+                    sx={{ fontSize: '16px', color: 'text.disabled', mb: 3 }}
+                    component="p"
+                  >
+                    Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.
                   </Typography>
                   <FormGroup sx={{ mb: 2 }}>
-                    <InputLabel
-                      sx={{ color: "common.black", mb: 1 }}
-                      htmlFor="input">
+                    <InputLabel sx={{ color: 'common.black', mb: 1 }} htmlFor="input">
                       Username
                     </InputLabel>
                     <Input
@@ -82,31 +77,29 @@ const Login: React.FC<IProps> = ({ ...props }) => {
                       id="username-field"
                       name="username"
                       sx={{
-                        fontSize: "1rem",
-                        boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.1)",
-                        borderRadius: "4px",
-                        background: "#fff",
-                        padding: "10px",
+                        fontSize: '1rem',
+                        boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.1)',
+                        borderRadius: '4px',
+                        background: '#fff',
+                        padding: '10px'
                       }}
                       disableUnderline
                       placeholder="your-email@gmail.com"
                     />
                   </FormGroup>
                   <FormGroup sx={{ mb: 2 }}>
-                    <InputLabel
-                      sx={{ color: "common.black", mb: 1 }}
-                      htmlFor="input">
+                    <InputLabel sx={{ color: 'common.black', mb: 1 }} htmlFor="input">
                       Password
                     </InputLabel>
                     <Input
                       id="input"
                       name="abc"
                       sx={{
-                        fontSize: "1rem",
-                        boxShadow: "0 1px 2px 0 rgba(0, 0, 0, 0.1)",
-                        borderRadius: "4px",
-                        background: "#fff",
-                        padding: "10px",
+                        fontSize: '1rem',
+                        boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.1)',
+                        borderRadius: '4px',
+                        background: '#fff',
+                        padding: '10px'
                       }}
                       disableUnderline
                       placeholder="Your Password"
@@ -115,19 +108,19 @@ const Login: React.FC<IProps> = ({ ...props }) => {
                   <Box className="d-flex align-items-center" sx={{ mb: 6 }}>
                     <FormControlLabel
                       sx={{
-                        "& > .MuiTypography-root": {
+                        '& > .MuiTypography-root': {
                           fontSize: 14,
-                          color: "text.black",
-                        },
+                          color: 'text.black'
+                        }
                       }}
                       label="Remember me"
                       control={
                         <Checkbox
                           sx={{
-                            color: "rgba(251, 119, 26, 1)",
-                            "&.Mui-checked": {
-                              color: "rgba(251, 119, 26, 1)",
-                            },
+                            color: 'rgba(251, 119, 26, 1)',
+                            '&.Mui-checked': {
+                              color: 'rgba(251, 119, 26, 1)'
+                            }
                           }}
                         />
                       }
@@ -135,11 +128,12 @@ const Login: React.FC<IProps> = ({ ...props }) => {
                     <Typography
                       className="cursor-pointer"
                       sx={{
-                        ml: "auto",
+                        ml: 'auto',
                         fontSize: 14,
-                        color: "#888",
-                        textDecoration: "underline",
-                      }}>
+                        color: '#888',
+                        textDecoration: 'underline'
+                      }}
+                    >
                       Forgot Password
                     </Typography>
                   </Box>
@@ -149,25 +143,25 @@ const Login: React.FC<IProps> = ({ ...props }) => {
                     fullWidth
                     variant="contained"
                     sx={{
-                      "&": {
+                      '&': {
                         mb: 3,
                         paddingY: 1.5,
-                        fontSize: "1rem",
-                        backgroundColor: "rgba(251, 119, 26, 1)",
-                        borderColor: "rgba(251, 119, 26, 1)",
+                        fontSize: '1rem',
+                        backgroundColor: 'rgba(251, 119, 26, 1)',
+                        borderColor: 'rgba(251, 119, 26, 1)'
                       },
-                      "&:hover": { backgroundColor: "rgba(251, 119, 26, 0.9)" },
-                    }}>
-                    {loading ? "..." : "Login"}
+                      '&:hover': { backgroundColor: 'rgba(251, 119, 26, 0.9)' }
+                    }}
+                  >
+                    {loading ? '...' : 'Login'}
                   </Button>
-                  <Typography
-                    className="text-center"
-                    sx={{ fontSize: 16, color: "text.disabled" }}>
-                    Not Registered?{" "}
+                  <Typography className="text-center" sx={{ fontSize: 16, color: 'text.disabled' }}>
+                    Not Registered?{' '}
                     <Typography
                       className="cursor-pointer"
-                      sx={{ color: "rgba(251, 119, 26, 1)" }}
-                      component="span">
+                      sx={{ color: 'rgba(251, 119, 26, 1)' }}
+                      component="span"
+                    >
                       Create an account
                     </Typography>
                   </Typography>
@@ -178,13 +172,14 @@ const Login: React.FC<IProps> = ({ ...props }) => {
           <Grid item xs={6}>
             <Box
               sx={{
-                height: "100%",
+                height: '100%',
                 backgroundImage: `url(
                     'https://preview.colorlib.com/theme/bootstrap/login-form-02/images/bg_1.jpg.webp'
                   )`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}></Box>
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}
+            ></Box>
           </Grid>
         </Grid>
       </Box>
