@@ -11,14 +11,15 @@ const themes = (type: number) =>
     components: { ...componentTheme },
     typography: {
       ...typography,
+
     },
     breakpoints: {
       values: {
-        xs: 0,
-        sm: 600,
-        md: 900,
-        lg: 1200,
-        xl: 1536,
+        xs: 0,    // 0 - 599
+        sm: 600,  // 601 - 899 
+        md: 900,  // 900 - 1199
+        lg: 1200, // 1200 - 1536
+        xl: 1536, // 1536+
       },
     },
   });

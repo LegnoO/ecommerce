@@ -1,7 +1,7 @@
 /** @format */
 
 import { Typography, Chip, Container, Grid, Fab, Stack, Box } from '@mui/material';
-import Wrapper from '~/components/CustomTagName/Wrapper';
+import { Wrapper } from '~/components/CustomTagName';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 const Banner = () => {

@@ -3,7 +3,7 @@
 import Banner from "../layout/Banner";
 import Blog from "../layout/Blog";
 import Header from "../layout/Header";
-import Product from "../layout/Product";
+import Product from "../layout/Product/ProductList";
 import Slider from "../layout/Slider";
 import Footer from "../layout/Footer";
 

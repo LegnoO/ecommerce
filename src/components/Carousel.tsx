@@ -1,8 +1,8 @@
 /** @format */
 
-import { useState, useRef, useEffect } from "react";
-import { Stack, Typography } from "@mui/material";
-import Wrapper from "./CustomTagName/Wrapper";
+import { useState, useRef, useEffect } from 'react';
+import { Stack, Typography } from '@mui/material';
+import { Wrapper } from './CustomTagName';
 
 interface IProps {
   width: string;
@@ -28,15 +28,16 @@ const Carousel: React.FC<IProps> = ({ width, children, styles }) => {
         {nodeList.map((_, index) => {
           return (
             <Typography
-              sx={{ fontSize: "12px" }}
+              sx={{ fontSize: '12px' }}
               variant="body2"
               key={index}
               className={`cursor-pointer${
                 index === currentIndex
-                  ? " text-dark fw-bold text-decoration-underline"
-                  : " text-muted"
+                  ? ' text-dark fw-bold text-decoration-underline'
+                  : ' text-muted'
               }`}
-              onClick={() => setIndex(index)}>
+              onClick={() => setIndex(index)}
+            >
               0{index + 1}
             </Typography>
           );
@@ -47,13 +48,14 @@ const Carousel: React.FC<IProps> = ({ width, children, styles }) => {
           ref={carouselRef}
           direction="row"
           sx={{
-            "& > *": {
-              minWidth: "100%",
+            '& > *': {
+              minWidth: '100%'
             },
             transform: `translateX(${currentIndex * -100}%)`,
-            transition: "all .65s ease",
+            transition: 'all .65s ease'
           }}
-          className="w-100 d-flex">
+          className="w-100 d-flex"
+        >
           {children}
         </Stack>
       </Wrapper>
