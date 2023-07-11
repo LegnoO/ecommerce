@@ -1,11 +1,14 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit'
+import { IProduct } from "~/models/ISliceState"
 import productService from '~/services/productService';
 
-export interface IProduct {
-  id: string;
-  username: string;
-  password: string;
-}
+// export interface IProduct {
+//   id: string;
+//   username: string;
+//   password: string;
+// }
+
+
 
 export interface IApiState {
   product: IProduct[]
@@ -26,7 +29,16 @@ export const fetchProduct = createAsyncThunk('api/fetchProduct', productService.
 export const productSlice = createSlice({
   name: 'product',
   initialState,
-  reducers: {},
+  reducers: {
+    sortById: (state) => {
+      const sortDataById = state.product.sort((a, b) => a.id > b.id ? -1 : 1)
+      console.log(current(state.product))
+      Object.assign(
+        state, {
+        product: sortDataById
+      })
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(fetchProduct.pending, state => {
@@ -38,7 +50,7 @@ export const productSlice = createSlice({
       .addCase(fetchProduct.fulfilled, (state, action) => {
         Object.assign(
           state, {
-          product: action.payload as IProduct[],
+          product: action.payload,
           loading: false,
           error: null,
         })
@@ -53,6 +65,6 @@ export const productSlice = createSlice({
   },
 })
 
-export const { } = productSlice.actions
+export const { sortById } = productSlice.actions
 
 export default productSlice.reducer

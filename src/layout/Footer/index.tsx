@@ -5,7 +5,13 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 const Footer = () => {
   return (
     <>
-      <Container sx={{ marginBottom: '30px' }}>
+      <Container
+       
+        className="footer"
+        sx={{
+          marginBottom: '30px'
+        }}
+      >
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <Box>

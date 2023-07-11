@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import productService from '~/services/productService';
-import { fetchProduct } from '~/features/product/productSlice';
+import { fetchProduct, sortById } from '~/features/productSlice';
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import { styled } from '@mui/system';
 import {
@@ -17,6 +17,7 @@ import {
   Stack,
   Button
 } from '@mui/material';
+import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 import QuickViewButton from './QuickViewButton';
 import { useSelector } from 'react-redux';
@@ -37,12 +38,15 @@ const Figure = styled('figure')({
 const Product = () => {
   const dispatch = useAppDispatch();
 
-  const { product, loading, error } = useAppSelector((state) => state.product);
+  const { product } = useAppSelector((state) => state.product);
 
-  console.log('data: ', product, loading, error);
+  console.log('data: ', product);
 
   useEffect(() => {
     dispatch(fetchProduct());
+    setTimeout(() => {
+      dispatch(sortById());
+    }, 5000);
   }, []);
 
   return (
@@ -56,99 +60,112 @@ const Product = () => {
           Our Products
         </Typography>
         <Grid container spacing={4}>
-          <Grid item xs={3}>
-            <Card className="position-relative shadow-none cursor-pointer">
-              <Figure
-                className="fw-large"
-                sx={{
-                  color: 'common.white',
-                  padding: 0.35
-                }}
-              >
-                -50%
-              </Figure>
+          {product.map((item, index) => {
+            return (
+              <Grid key={index} item xs={3}>
+                <Card className="product__item position-relative shadow-none cursor-pointer">
+                  <Figure
+                    className="fw-large"
+                    sx={{
+                      color: 'common.white',
+                      padding: 0.35
+                    }}
+                  >
+                    -50%
+                  </Figure>
 
-              <Box
-                sx={{
-                  '&:hover .quickview-icon': {
-                    transform: 'translateY(-10px)',
-                    opacity: 1
-                  },
-                  '&:hover .sold-out-button': {
-                    transform: 'scale(1) translateY(-66%)',
-                    opacity: 1
-                  }
-                }}
-                className="position-relative"
-              >
-                <CardMedia
-                  component="img"
-                  image="https://minim-demo.myshopify.com/cdn/shop/products/11-shop_dc7f2c3c-6550-45b8-b910-fbb215e9c111.png?v=1552896618"
-                  alt="green iguana"
-                />
-                <Button
-                  className="sold-out-button"
-                  sx={{
-                    '&': {
-                      position: 'absolute',
-                      bottom: '0%',
-                      left: '27.5%',
-                      transform: 'scale(0)',
-                      borderRadius: '50%',
-                      backgroundColor: 'common.white',
-                      color: 'primary.main',
-                      fontSize: 16,
-                      height: '120px',
-                      width: '120px',
-                      zIndex: '999',
-                      transition: 'all .4s ease'
-                    },
-                    '&:hover': {
-                      backgroundColor: 'primary.main',
-                      color: 'common.white'
-                    }
-                  }}
-                >
-                  Sold Out
-                </Button>
-                <Box
-                  sx={{
-                    '&': {
-                      opacity: 0,
-                      transform: 'translateY(0px)',
-                      transition: 'all .5s ease'
-                    }
-                  }}
-                  className="quickview-icon position-absolute bottom-0 w-100 d-flex justify-content-center"
-                >
-                  <Stack direction="row" spacing={1.25}>
-                    <QuickViewButton>
-                      <SearchIcon />
-                    </QuickViewButton>
-                    <QuickViewButton>
-                      <SearchIcon />
-                    </QuickViewButton>
-                    <QuickViewButton>
-                      <SearchIcon />
-                    </QuickViewButton>
-                  </Stack>
-                </Box>
-              </Box>
-              <CardContent className="text-center cursor-pointer">
-                <Typography
-                  sx={{ fontSize: 12, color: 'text.disabled' }}
-                  gutterBottom
-                  component="h6"
-                >
-                  OTTOMAN CHAIR
-                </Typography>
-                <Typography component="p" className="fw-large" sx={{ color: 'text.black' }}>
-                  $250.00
-                </Typography>
-                <Rating readOnly precision={0.5} value={1} max={1} size="small" />
-              </CardContent>
-            </Card>
-          </Grid>
+                  <Box
+                    sx={{
+                      '&:hover .quickview-icon': {
+                        transform: 'translateY(-10px)',
+                        opacity: 1
+                      },
+                      '&:hover .sold-out-button': {
+                        transform: 'scale(1) translateY(-66%)',
+                        opacity: 1
+                      }
+                    }}
+                    className="position-relative"
+                  >
+                    <CardMedia
+                      className="product__image"
+                      sx={{ width: '264px', height: '264px' }}
+                      component="img"
+                      // image="https://minim-demo.myshopify.com/cdn/shop/products/11-shop_dc7f2c3c-6550-45b8-b910-fbb215e9c111.png?v=1552896618"
+                      image={item.images[0]}
+                      alt="green iguana"
+                    />
+                    <Button
+                      className="sold-out-button"
+                      sx={{
+                        '&': {
+                          position: 'absolute',
+                          bottom: '0%',
+                          left: '27.5%',
+                          transform: 'scale(0)',
+                          borderRadius: '50%',
+                          backgroundColor: 'common.white',
+                          color: 'primary.main',
+                          fontSize: 16,
+                          height: '120px',
+                          width: '120px',
+                          zIndex: '999',
+                          transition: 'all .4s ease'
+                        },
+                        '&:hover': {
+                          backgroundColor: 'primary.main',
+                          color: 'common.white'
+                        }
+                      }}
+                    >
+                      Sold Out
+                    </Button>
+                    <Box
+                      sx={{
+                        '&': {
+                          opacity: 0,
+                          transform: 'translateY(0px)',
+                          transition: 'all .5s ease'
+                        }
+                      }}
+                      className="quickview-icon position-absolute bottom-0 w-100 d-flex justify-content-center"
+                    >
+                      <Stack direction="row" spacing={1.25}>
+                        <QuickViewButton>
+                          <ShoppingBagOutlinedIcon />
+                        </QuickViewButton>
+                        <QuickViewButton>
+                          <SearchIcon />
+                        </QuickViewButton>
+                        <QuickViewButton>
+                          <SearchIcon />
+                        </QuickViewButton>
+                      </Stack>
+                    </Box>
+                  </Box>
+                  <CardContent className="text-center cursor-pointer">
+                    <Typography
+                      className="product__name"
+                      sx={{ fontSize: 12, color: 'text.disabled' }}
+                      gutterBottom
+                      component="h6"
+                    >
+                      {item.title}
+                    </Typography>
+                    <Typography
+                      component="p"
+                      className="product__price fw-large"
+                      sx={{ color: 'text.black' }}
+                    >
+                      {/* $250.00 */}
+                      {item.price}$
+                    </Typography>
+                    <Rating readOnly precision={0.5} value={item.rating} max={5} size="small" />
+                  </CardContent>
+                </Card>
+              </Grid>
+            );
+          })}
         </Grid>
       </Container>
     </>

@@ -5,6 +5,7 @@ interface IProps {
   alt: string;
   width?: string;
   height?: string;
+  sx?: { [x: string]: any };
   [x: string]: any;
 }
 
@@ -13,8 +14,9 @@ const Img = styled('img')({});
 const Image: React.FC<IProps> = ({
   src,
   alt = '',
-  width = '1.5rem',
-  height = '1.5rem',
+  width = 'auto',
+  height = 'auto',
+  sx,
   ...props
 }) => {
   const [fallBack, setFallBack] = useState<string>('');
@@ -31,7 +33,8 @@ const Image: React.FC<IProps> = ({
           overflow: 'hidden',
           width,
           height
-        }
+        },
+        ...sx
       }}
       src={fallBack || src}
       alt={alt}
