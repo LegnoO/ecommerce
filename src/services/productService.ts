@@ -11,7 +11,7 @@ class ProductService {
       url: "products"
     };
     try {
-      console.log(import.meta.env.VITE_BASE_URL)
+      // console.log(import.meta.env.VITE_BASE_URL)
 
       const response = await axios(config)
       // const result = Object.values(response.data)

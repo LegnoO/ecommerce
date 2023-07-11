@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import productService from '~/services/productService';
-import { fetchProduct, sortById } from '~/features/productSlice';
+import { fetchProduct } from '~/features/productSlice';
+import { addToCart } from '~/features/cartSlice';
+
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
 import { styled } from '@mui/system';
 import {
@@ -35,17 +37,17 @@ const Figure = styled('figure')({
   lineHeight: '1rem'
 });
 
-const Product = () => {
+const ProductList = () => {
   const dispatch = useAppDispatch();
 
   const { product } = useAppSelector((state) => state.product);
-
-  console.log('data: ', product);
+  const { cart } = useAppSelector((state) => state.cart);
+  console.log('cart: ', cart);
 
   useEffect(() => {
     dispatch(fetchProduct());
     setTimeout(() => {
-      dispatch(sortById());
+      // dispatch(addToCart());
     }, 5000);
   }, []);
 
@@ -131,7 +133,12 @@ const Product = () => {
                       className="quickview-icon position-absolute bottom-0 w-100 d-flex justify-content-center"
                     >
                       <Stack direction="row" spacing={1.25}>
-                        <QuickViewButton>
+                        <QuickViewButton
+                          onClick={() => {
+                            console.log('clicked');
+                            dispatch(addToCart(item));
+                          }}
+                        >
                           <ShoppingBagOutlinedIcon />
                         </QuickViewButton>
                         <QuickViewButton>
@@ -172,4 +179,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default ProductList;

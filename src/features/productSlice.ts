@@ -31,12 +31,7 @@ export const productSlice = createSlice({
   initialState,
   reducers: {
     sortById: (state) => {
-      const sortDataById = state.product.sort((a, b) => a.id > b.id ? -1 : 1)
-      console.log(current(state.product))
-      Object.assign(
-        state, {
-        product: sortDataById
-      })
+      state.product.sort((a, b) => a.id > b.id ? -1 : 1)
     },
   },
   extraReducers: builder => {

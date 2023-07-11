@@ -25,11 +25,13 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 // Component
 import SearchBar from './SearchBar';
 import Image from '~/components/Image';
+import { useAppSelector } from '~/app/hooks';
 
 // Styles
 import { stylesPropsSx } from './style';
 
 const Navbar = () => {
+  const { cart } = useAppSelector((state) => state.cart);
   const classes = stylesPropsSx.header;
   const isMediumScreen = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
   const headerElement = document.querySelector('.header__navbar');
@@ -142,7 +144,7 @@ const Navbar = () => {
                     </IconButton>
 
                     <IconButton className="cart__icon">
-                      <Badge badgeContent={4} color="success">
+                      <Badge badgeContent={cart.length} color="success">
                         <Image
                           src={
                             '//minim-demo.myshopify.com/cdn/shop/t/4/assets/iconcar.png?v=19912236354837126781552623685'
