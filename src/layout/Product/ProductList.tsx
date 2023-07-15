@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import productService from '~/services/productService';
-import { fetchProduct } from '~/features/productSlice';
+import { fetchAllProduct } from '~/features/productSlice';
 import { addToCart } from '~/features/cartSlice';
 
 import { useAppDispatch, useAppSelector } from '~/app/hooks';
@@ -21,7 +21,7 @@ import {
 } from '@mui/material';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import SearchIcon from '@mui/icons-material/Search';
-import QuickViewButton from './QuickViewButton';
+import QuickViewButton from './components/QuickViewButton';
 import { useSelector } from 'react-redux';
 
 const Figure = styled('figure')({
@@ -40,12 +40,12 @@ const Figure = styled('figure')({
 const ProductList = () => {
   const dispatch = useAppDispatch();
 
-  const { product } = useAppSelector((state) => state.product);
+  const { products } = useAppSelector((state) => state.product);
   const { cart } = useAppSelector((state) => state.cart);
   console.log('cart: ', cart);
 
   useEffect(() => {
-    dispatch(fetchProduct());
+    dispatch(fetchAllProduct());
     setTimeout(() => {
       // dispatch(addToCart());
     }, 5000);
@@ -62,7 +62,7 @@ const ProductList = () => {
           Our Products
         </Typography>
         <Grid container spacing={4}>
-          {product.map((item, index) => {
+          {products.map((item, index) => {
             return (
               <Grid key={index} item xs={3}>
                 <Card className="product__item position-relative shadow-none cursor-pointer">

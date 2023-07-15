@@ -11,38 +11,62 @@ import productService from '~/services/productService';
 
 
 export interface IApiState {
-  product: IProduct[]
+  products: IProduct[]
+  product: IProduct | {}
   loading: boolean
   error: string | null
 }
 
 
 const initialState: IApiState = {
-  product: [],
+  products: [],
+  product: {},
   loading: false,
   error: null,
 }
 
-export const fetchProduct = createAsyncThunk('api/fetchProduct', productService.getProduct);
-
+export const fetchAllProduct = createAsyncThunk('api/fetchAllProduct', productService.getAllProduct);
+export const fetchSingleProduct = createAsyncThunk('api/fetchSingleProduct', productService.getSingleProduct);
 
 export const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
     sortById: (state) => {
-      state.product.sort((a, b) => a.id > b.id ? -1 : 1)
+      state.products.sort((a, b) => a.id > b.id ? -1 : 1)
     },
   },
   extraReducers: builder => {
     builder
-      .addCase(fetchProduct.pending, state => {
+      .addCase(fetchAllProduct.pending, state => {
         Object.assign(state, {
           loading: true,
           error: null,
         })
       })
-      .addCase(fetchProduct.fulfilled, (state, action) => {
+      .addCase(fetchAllProduct.fulfilled, (state, action) => {
+        Object.assign(
+          state, {
+          products: action.payload,
+          loading: false,
+          error: null,
+        })
+      })
+      .addCase(fetchAllProduct.rejected, (state, action) => {
+        Object.assign(
+          state, {
+          loading: false,
+          error: action.error.message ?? 'An error occurred',
+        })
+      })
+
+      .addCase(fetchSingleProduct.pending, state => {
+        Object.assign(state, {
+          loading: true,
+          error: null,
+        })
+      })
+      .addCase(fetchSingleProduct.fulfilled, (state, action) => {
         Object.assign(
           state, {
           product: action.payload,
@@ -50,7 +74,7 @@ export const productSlice = createSlice({
           error: null,
         })
       })
-      .addCase(fetchProduct.rejected, (state, action) => {
+      .addCase(fetchSingleProduct.rejected, (state, action) => {
         Object.assign(
           state, {
           loading: false,

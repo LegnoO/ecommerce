@@ -1,11 +1,7 @@
 import React from 'react';
 
 const index = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  return <div>Cart</div>;
 };
 
 export default index;

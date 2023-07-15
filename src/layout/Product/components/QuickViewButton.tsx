@@ -1,16 +1,7 @@
 /** @format */
 
 import React from 'react';
-import {
-  Typography,
-  CardMedia,
-  CardContent,
-  Container,
-  Card,
-  Grid,
-  Rating,
-  Box
-} from '@mui/material';
+import { Box } from '@mui/material';
 
 interface IProps {
   children: React.ReactNode;
