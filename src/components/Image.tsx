@@ -14,7 +14,7 @@ const Img = styled('img')({});
 const Image: React.FC<IProps> = ({
   src,
   alt = '',
-  width = 'auto',
+  width = '100%',
   height = 'auto',
   sx,
   ...props

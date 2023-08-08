@@ -1,18 +1,9 @@
 /** @format */
 import { useState, useEffect } from 'react';
 import { ThemeProvider } from '@mui/material';
-
-import productService from '~/services/productService';
-import axios from 'axios';
-// import httpRequest from "./services/apiService/httpRequest";
 import themes from './themes';
 import Routing from './router/Routing';
 
-interface IProduct {
-  id: string;
-  username: string;
-  password: string;
-}
 
 function App() {
   // const [test, setTest] = useState<IProduct[]>([]);
@@ -25,7 +16,6 @@ function App() {
     //   setTest(data);
     // };
     // // fetchProduct();
-    
     // axios.put('https://ecommerce-api-133d7-default-rtdb.firebaseio.com/products.json', {});
     // axios.post('https://ecommerce-api-133d7-default-rtdb.firebaseio.com/products.json', {
     //   id: 1,

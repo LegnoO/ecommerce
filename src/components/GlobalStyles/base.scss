@@ -1,9 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 @import url("./custom.scss");
 
-:root{
-  --test: 120px;
-  --box-shadow-sm: 0 .125rem .25rem rgba(0,0,0,.075);
+:root {
+  /* Font Size */
+  --hero-text-font-size: 4rem;
+  --large-title-font-size: 3rem;
+  --title-font-size: 1.5rem;
+  --price-font-size: 1.5rem;
+  --subtitle-font-size: 1.125rem;
+  --paragraph-font-size: 1;
+  --icon-font-size: 1.5rem;
+  --sm-text-font-size: 0.875rem;
+
+  /* Box Shadow */
+  --box-shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
 *,
@@ -15,11 +25,12 @@
 }
 
 html {
+  font-size: 16px;
   scroll-behavior: smooth;
 }
 
 body {
-   line-height: 1.5; // 24px
+  line-height: 1.5; // 24px
 
   // background-color: #F6F9FC;
 }
@@ -37,4 +48,10 @@ ul {
 
 a {
   text-decoration: none;
+  color: inherit; // Link router reset
+}
+
+img {
+  vertical-align: middle;
+  max-width: 100%;
 }

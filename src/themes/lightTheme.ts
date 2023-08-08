@@ -3,9 +3,14 @@ import { createTheme } from "@mui/material";
 const lightTheme = createTheme({
   palette: {
     mode: "light",
+    // neutral: {
+    //   main: "#973"
+    // },
     common: {
       white: "#fff",
       black: "#000",
+      neutral: "#f9f9f9;",
+      gray:"#999999",
     },
     primary: {
       main: "#3e976b",

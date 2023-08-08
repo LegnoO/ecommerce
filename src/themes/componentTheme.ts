@@ -1,5 +1,4 @@
 
-
 const componentTheme = {
   MuiChip: {
     styleOverrides: {

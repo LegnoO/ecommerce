@@ -1,29 +1,37 @@
 /** @format */
-import {
-  RouterProvider,
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route
-} from 'react-router-dom';
-import { ProductList, ProductDetail } from '~/layout/Product';
-
-import Home from '../pages/Home';
-import Login from '../Login';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Fragment } from 'react';
+import { IRoutes } from '~/types/IRoutes';
+import { Cart } from '~/layouts';
+import ProductList, { ProductDetail } from '~/layouts/Product';
+import DefaultLayout from '~/layouts/DefaultLayout';
+import Home from '../views/HomeView';
+import { Login } from '~/layouts/User';
 
 const Routing = () => {
-  const router = createBrowserRouter(
-    createRoutesFromElements(
+  const routesConfig: IRoutes[] = [
+    { path: '/', component: <Home /> },
+    { path: '/login', component: <Login />, layout: null },
+    { path: '/product', component: <ProductList /> },
+    { path: '/product/:id', component: <ProductDetail /> },
+    { path: '/cart', component: <Cart /> }
+  ];
 
-      <Route>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/product" element={<ProductList />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
-      </Route>
-
-    )
+  return (
+    <BrowserRouter>
+      <Routes>
+        {routesConfig.map((route, index) => {
+          const Layout = (route.layout === null ? Fragment : route.layout) || DefaultLayout;
+          const Component = route.component;
+          return (
+            <Route key={index}>
+              <Route key={index} path={route.path} element={<Layout>{Component}</Layout>} />
+            </Route>
+          );
+        })}
+      </Routes>
+    </BrowserRouter>
   );
-  return <RouterProvider router={router} />;
 };
 
 export default Routing;

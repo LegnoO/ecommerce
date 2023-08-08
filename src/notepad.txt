@@ -1,0 +1,11 @@
+-- detail --
+https://wpastra.com/website-templates/ecommerce/
+
+https://websitedemos.net/recycled-shoe-store-04/product/mens-red-running/
+https://websitedemos.net/blingg-jewelry-store-04/product/product-name-10/
+https://websitedemos.net/eyewear-store-04/product/product-name-11/
+https://websitedemos.net/electronic-store-04/product/home-speaker-500-smart-bluetooth-speaker-with-alexa-voice-control-built-in-white/
+
+
+-- api --
+https://dummyjson.com/docs/products?fbclid=IwAR0d-Mln16UdYkZMvnZ4Jr3p3eAl-RK0xMNA4LYmw9JJt_s_JPzGIUWXJ_0

@@ -1,18 +1,24 @@
-import axios from "axios"
+import httpRequest from './httpRequest';
+import cartService from './cartService';
 
-import httpRequestFirebase from "./apiService";
+type IFormData = {
+   username: string;
+   password: string;
+};
 
-interface IUserData {
-    username: string;
-    email: string;
+class AuthService {
+   loginWithAuth = async ({ username, password }: IFormData) => {
+      try {
+         const response = await httpRequest.post('/auth/login', { username, password });
+         const userId = response.data.id;
+         await cartService.getUserCart(userId);
+         localStorage.setItem('user', JSON.stringify(response.data));
+         return response.data;
+      } catch (error) {
+         console.log(error);
+      }
+   };
 }
 
-
-const login = async ({ username, email }: IUserData): Promise<any> => {
-    const data = { username, email }
-    // await httpRequestFirebase('GET', `'/users?orderBy='username'&equalTo=${username}`);
-    return { username, email }
-}
-
-
-export const auth = { login }
+const authService = new AuthService();
+export default authService;

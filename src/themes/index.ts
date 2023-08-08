@@ -1,7 +1,21 @@
 import { createTheme } from "@mui/material";
 import lightTheme from "./lightTheme";
 import componentTheme from "./componentTheme";
-import typography from "./typography";
+
+declare module '@mui/material/styles' {
+  // interface Palette {
+  //   neutral: Palette['primary'];
+  // }
+
+  // // allow configuration using `createTheme`
+  // interface PaletteOptions {
+  //   neutral?: PaletteOptions['primary'];
+  // }
+  interface CommonColors {
+    neutral: string;
+    gray: string;
+  }
+}
 
 const typeTheme = [lightTheme];
 
@@ -10,8 +24,9 @@ const themes = (type: number) =>
     ...typeTheme[type],
     components: { ...componentTheme },
     typography: {
-      ...typography,
-
+      allVariants: {
+        fontFamily: ["Poppins", "serif"].join(","),
+      },
     },
     breakpoints: {
       values: {

@@ -1,41 +1,18 @@
-import axios, { AxiosRequestConfig } from "axios"
-import { IProduct } from "~/models/ISliceState"
+import { IProduct } from "~/types/ISliceState"
+import httpRequest from "./httpRequest";
 
 class ProductService {
   getAllProduct = async (): Promise<IProduct[]> => {
-    const config: AxiosRequestConfig = {
-      method: "GET",
-      headers: { Accept: "application/json" },
-      baseURL: import.meta.env.VITE_BASE_URL,
-      // url: `products.json`,
-      url: "products"
-    };
-    try {
-      // console.log(import.meta.env.VITE_BASE_URL)
-
-      const response = await axios(config)
-      // const result = Object.values(response.data)
-      const result: IProduct[] = response.data.products.slice(0, 10)
-      return result
-    } catch (error) {
-      throw error
-    }
+    const response = await httpRequest.get("/products")
+    // const result = Object.values(response.data)
+    const result: IProduct[] = response.data.products.slice(0, 10)
+    return result
   }
+  
   getSingleProduct = async (id: string): Promise<IProduct> => {
-    const config: AxiosRequestConfig = {
-      method: "GET",
-      headers: { Accept: "application/json" },
-      baseURL: import.meta.env.VITE_BASE_URL,
-      url: `products/${id}`
-    };
-    try {
-      const response = await axios(config)
-      // const result = Object.values(response.data)
-      const result: IProduct = response.data
-      return result
-    } catch (error) {
-      throw error
-    }
+    const response = await httpRequest.get(`/products/${id}`)
+    const result: IProduct = response.data
+    return result
   }
 }
 

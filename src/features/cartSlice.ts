@@ -1,21 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { IProduct } from "~/models/ISliceState"
+import { createSlice, current } from '@reduxjs/toolkit'
+import { ICart } from "~/types/ISliceState"
 
 
 export interface IApiState {
-  cart: IProduct[]
+  cart: ICart
   loading: boolean
   error: string | null
 }
 
 
 const getInitialCart = () => {
-  const cartStorage = localStorage.getItem("cart")!
+  const cartStorage = localStorage.getItem("cart") || '{}';
   return cartStorage ? JSON.parse(cartStorage) : []
 }
 
+const cartStorage = getInitialCart()
+
 const initialState: IApiState = {
-  cart: getInitialCart(),
+  cart: cartStorage,
   loading: false,
   error: null,
 }
@@ -24,22 +26,25 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
+
     sortById: (state) => {
-      state.cart.sort((a, b) => a.id > b.id ? -1 : 1)
+      const cartData = state.cart
+      cartData.carts.sort((a, b) => a.id > b.id ? -1 : 1)
     },
     addToCart: (state, action) => {
-      try {
-        const currentItem = action.payload
-        const exists = state.cart.find(item => item.id === currentItem.id)
-        if (exists) {
-          exists.stock += 1
-        } else {
-          state.cart = [...state.cart, currentItem]
-        }
-        localStorage.setItem("cart", JSON.stringify(state.cart))
-      } catch (error) {
-        throw error
+      const cartData = state.cart
+      let currentItem = action.payload.product
+      const newQuantity = action.payload.quantity
+      // check item exists in cart
+      const exists = cartData.carts.find(item => item.id === currentItem.id)
+      if (exists) {
+        newQuantity ? exists.quantity += action.payload.quantity : exists.quantity += 1
+      } else {
+        // push item to cart
+        currentItem = { ...currentItem, quantity: action.payload.quantity }
+        cartData.carts = [...cartData.carts, currentItem]
       }
+      localStorage.setItem("cart", JSON.stringify(cartData))
     },
   },
 })

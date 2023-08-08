@@ -1,0 +1,8 @@
+export { default as Banner } from "./Banner"
+export { default as Blog } from "./Blog"
+export { default as Cart } from "./Cart"
+export { default as Footer } from "./Footer"
+export { default as Navbar } from "./Navbar"
+export { default as Product } from "./Product"
+export { default as Slider } from "./Slider"
+export { default as DefaultLayout } from "./DefaultLayout"

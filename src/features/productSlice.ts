@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit'
-import { IProduct } from "~/models/ISliceState"
+import { IProduct } from "~/types/ISliceState"
 import productService from '~/services/productService';
 
 // export interface IProduct {
@@ -12,7 +12,7 @@ import productService from '~/services/productService';
 
 export interface IApiState {
   products: IProduct[]
-  product: IProduct | {}
+  product: IProduct
   loading: boolean
   error: string | null
 }
@@ -20,7 +20,7 @@ export interface IApiState {
 
 const initialState: IApiState = {
   products: [],
-  product: {},
+  product: {} as IProduct,
   loading: false,
   error: null,
 }
